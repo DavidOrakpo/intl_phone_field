@@ -17,6 +17,9 @@ class IntlPhoneField extends StatefulWidget {
   /// Whether to hide the text being edited (e.g., for passwords).
   final bool obscureText;
 
+
+  final bool flagIconLocationIsDefault;
+
   /// How the text should be aligned horizontally.
   final TextAlign textAlign;
 
@@ -266,6 +269,7 @@ class IntlPhoneField extends StatefulWidget {
     this.focusNode,
     this.decoration = const InputDecoration(),
     this.style,
+    this.flagIconLocationIsDefault = true,
     this.dropdownTextStyle,
     this.onSubmitted,
     this.validator,
@@ -400,7 +404,8 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
       onFieldSubmitted: widget.onSubmitted,
       magnifierConfiguration: widget.magnifierConfiguration,
       decoration: widget.decoration.copyWith(
-        prefixIcon: _buildFlagsButton(),
+        prefixIcon: widget.flagIconLocationIsDefault ? _buildFlagsButton() : null,
+        suffixIcon: widget.flagIconLocationIsDefault ? null : _buildFlagsButton(),
         counterText: !widget.enabled ? '' : null,
       ),
       style: widget.style,
